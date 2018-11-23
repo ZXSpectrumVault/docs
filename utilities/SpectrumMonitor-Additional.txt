@@ -1,0 +1,569 @@
+Spectrum
+MONITOR
+
+ADDITIONAL INSTRUCTIONS FOR
+VERSION 2.1
+
+Please read in conjunction with
+original Owner's Manual
+
+Spectrum 16k & 48k
+
+MACHINE
+CODE
+SYSTEM
+
+
+
+
+                              1
+SPECTRUM MONITOR
+
+Version 2.1
+
+
+Both the 16K  and  48K  versions  of  the  new  Spectrum
+MONITOR have been improved, and the two programs  remain
+essentially identical apart from the location in  memory
+that they occupy. The principles  of  the  Machine  Code
+system have been maintained, with the 48K Assembler  and
+the 16K Monitor working together in memory.
+
+The Monitor can be customised to work with the following
+range of Centronics Printer Interfaces:
+         1). Kempston Interface
+         2). Kempston 'E' Interface
+         3). Euroelectronics Lprint interface
+         4). Hilderbay Interface, Type H
+         5). Hilderbay Interface, Type T
+         6). Hilderbay Interface, Type K
+         7). Morex Centronics Interface
+
+Options are also given to allow use  of  the  normal  ZX
+Printer, as  well  as  RS232  output  via  the  Sinclair
+Interface 1.
+
+LOADING
+The new program is supplied on a standard  cassette  and
+should be loaded by entering
+                     LOAD ""
+
+The program is loaded in two parts and  auto  runs  when
+loaded. You will then be given nine Printer  options  to
+chose from. Enter the number of the option  you  require
+(there is no need to press ENTER). If you  are  using  a
+Centronics Interface option you will then  be  asked  to
+state whether your printer gives an automatic Line  Feed
+after a Carriage Return. If it does,  select  option  1,
+otherwise select  option  2,  and  the  Monitor's  print
+routines will be set to send a separate Line  Feed.  (If
+in doubt about this, you should refer to  the  operating
+instructions supplied with your Printer. It  is  usually
+possible to select this feature  by  means  of  switches
+inside your printer).
+
+Having customised your program  for  your  printer,  you
+will then be given the option of making a  copy  of  the
+customised program onto a cassette or onto a  Microdrive
+Cartridge. (Microdrive Cartridges are NOT supplied).  If
+you intend Saving onto Microdrive, you should make  sure
+that you have a Formatted Cartridge with at least 8K  of
+spare capacity available BEFORE  you  start  customising
+the program.
+
+If you Save onto cassette, you should only  connect  the
+MIC lead when Saving, and the EAR lead when Verifying.
+
+ 2
+
+*********************** WARNING ************************
+
+THIS PROGRAM IS COPYRIGHT and ONE COPY ONLY may be  made
+               for your OWN PERSONAL USE.
+
+It is illegal to  sell  copies  or  to  give  copies  to
+                          friends
+
+********************************************************
+
+The Basic loader program of the  customised  Monitor  is
+saved with the name "Mon 16" or "Mon 48" and  should  be
+loaded from cassette by
+                LOAD "Mon 16"
+or              LOAD "Mon 48"
+
+To load from Microdrive cartridge,use
+                LOAD *"m";n;"Mon 16"
+or              LOAD *"m";n;"Mon 48"
+where 'n' is the Drive number.
+
+In all  cases,  the  customised  Monitor  auto  runs  on
+loading, giving the usual entry message:
+               "Press BREAK for Monitor"
+
+If you return to Basic while using the Monitor, you  can
+re-enter the Monitor by means of
+
+         RANDOMISE USR 30479    (16K version)
+         RANDOMISE USR 63247    (48K version)
+
+
+The  commands  described  in  the  Owner's  Manual  that
+accompanied the original program still exist in the  new
+version, but some have been improved for easier use.
+The changes are as follows:
+
+R.REGISTER DISPLAY
+This now shows both main and alternate  Flags  registers
+in BIT form, with the  purpose  of  the  Flag  indicated
+above.
+
+P.PRINTER
+This now allows you to display a Hex  dump  from  memory
+onto the screen as well as onto the printer. Access  the
+command by typing  P  followed by the address from which
+you wish to start the display. If you want to define the
+address at which the display will stop, enter  that  Hex
+address following the  start  address,  otherwise  press
+ENTER. You will then be asked to select Printer  options
+for this command. Respond with:
+      N    if you require a screen output.
+
+      /    (Symbol Shift + V) if you require  a  Printer
+           output. This will direct the  printer  output
+
+                                                  3
+
+           to  the  ZX  Printer  or  via  a   Centronics
+           Interface, depending upon the way the program
+           was initially customised.
+
+      *    (Symbol Shift + B) if you require the output
+           via the RS232 facility of  Interface  1.  (If
+           Interface  1  is  not  connected,  this  will
+           produce a Basic error 'i', and leave  you  in
+           Basic). To use a Printer with the Interface 1
+           RS232, use the Basic FORMAT  command  to  set
+           the Baud Rate for your Printer.
+
+For screen output, 16 lines of  screen  information  are
+displayed, whereupon you can press ENTER to display  the
+next 16 lines, or press  X  to escape.  When  using  a
+Printer option, it is recommended that you define an end
+address, as the Printer option will  continue  operating
+until the end address is reached, or until the BREAK key
+(with Caps Shift) is pressed. The end  address  defaults
+to FFFF Hex if it is not specified. Pressing  the  BREAK
+key (with Caps Shift) will give a  Basic  error  message
+and leave you in Basic ONLY if  you  are  using  the  ZX
+Printer or RS232. Breaking out of a  Centronics  Printer
+routine returns you to the main Monitor prompt.
+
+Z.DISASSEMBLE
+Access this command by  typing   Z   followed   by   the
+address from which you wish the  disassembly  to  start.
+You can either now specify an address for disassembly to
+stop, or simply press ENTER  to  achieve  an  open-ended
+disassembly in the same way that  the  P  command  above
+operates. You will  be  given  the  same  Screen/Printer
+options as described in the  P  command above. Again the
+end address defaults to FFFF hex if it is  not  defined.
+If you attempt  to  disassemble  any  part  of  Spectrum
+Monitor,an error message 'INVALID ADDRESS' is displayed.
+
+GENERAL CHANGES
+The Monitor now operates even if the Z80 Interrupts have
+been  disabled  when  it  is  accessed.  Interrupts  are
+enabled on return to Basic, but  are  not  changed  when
+running Machine Code  routines  using  the  J  or  C
+commands. Screen colours used are  those  set  by  Basic
+commands as permanent screen colours.
+
+
+
+NEW COMMANDS
+ Two new commands have been added:-
+
+ a).E. Entry to 48K ASSEMBLER from 16K MONITOR
+     Type  X  to restore the Prompt  and  Cursor  to  the
+     bottom screen line and then type   E    followed  by
+     ENTER. If the 48K Assembler is resident it  will  be
+     accessed,  otherwise  the  Monitor's    Prompt    is
+
+   4
+
+     displayed.  A  full  check  of  the  Assembler    is
+     impossible, and it is up to the user to ensure  that
+     the Assembler and its associated tables  and  Source
+     Code have not been overwritten by Monitor commands.
+
+ b).T. TRACE (or Single Step)
+     Type  X  to restore the Prompt  and  Cursor  to  the
+     bottom screen line, and then type  T  . If  you  now
+     press ENTER, the  TRACE  (Single  Step)  command  is
+     accessed,  and  will  commence  operation  from  the
+     address shown against PC in  the  register  display.
+     (This facility will be explained more fully later).
+     Having typed  T  you can enter a 4 digit Hex address
+     in which case the Trace command will  commence  from
+     that address.
+
+
+The Trace command allows you to execute Machine Code  in
+ROM or RAM one instruction at  a  time,  or  in  certain
+specified blocks. But at ALL times, the execution of the
+Machine Code is strictly under the control of the  Trace
+command, and a crash is almost impossible. Commands such
+as LDIR (a self repeating block move) can cause a  crash
+by overwriting the Monitor, as can any instruction  that
+writes into memory. Altering  the  value  of  the  Stack
+Pointer can also overwrite the Monitor, and reference to
+the memory map of the new Monitor should help  to  avoid
+mistakes.
+The comprehensive screen display  throughout  the  Trace
+command gives a permanent display of  the  CPU  register
+contents, a disassembly of  the  current  and  the  next
+instructions,  the  contents  of  the  last  five  stack
+locations,  and  the  contents  of   specified    memory
+locations. The display is formed as shown below:-
+
+
+    +----------------------------------+
+    | STEP                             |
+    |                                  |
+    | 2D28 4F       LD     C,A         |
+    |                                  |
+    | IR     3F4C                STACK |
+    |           SZ H PNC          0009 |
+    | A´F´   00 01000100          000D |
+    | B´C´   1721                 10ED |
+    | D´E´   369B                 6C5D |
+    | H´L´   2758                *3365 |
+    |           SZ H PNC               |
+    | AF     0F 01010100               |
+    | BC     770F (BC)23 CB 71 2A A4   |
+    | DE     5D15 (DE)00 00 6A 7C 00   |
+    | HL     2D2B (HL)FD 21 3A 5C AF   |
+    |                                  |
+    | IX     03D4                      |
+    | IY     5C3A                      |
+    | SP     FDD3                      |
+    | PC     2D28                      |
+    | M0000 F3 AF 11 FF FF C3 CB 11 2A |
+    +----------------------------------+
+
+                                                  5
+
+The Trace command contains its own set of commands which
+are separate from the main Monitor commands,  and  allow
+control over   a) executing instructions singly;
+               b) running on to a  Breakpoint  (not  the
+                  same as a Breakpoint set by the main
+                  Monitor);
+          and  c) skipping to the end of a subroutine.
+Any section of code that  will  only  operate  correctly
+when  run  at  full  speed  (e.g.  Printer  or  cassette
+routines)  will  not  operate  correctly  in  the  Trace
+command as each  instruction  is  decoded  and  executed
+separately. The main  Monitor  commands  for  setting  a
+Breakpoint and running the code should be used instead.
+
+To demonstrate the trace command,  enter  the  following
+short routine using the  M  command in the main  Monitor
+to enter the Hex code shown in bold type. (If  you  have
+already accessed the Trace command, type  X  to exit  to
+the main Monitor before entering the example program).
+
+         6400            0005       ORG  6400H
+         6400 212C64     0010       LD   HL,642CH
+         6403 113412     0015       LD   DE,1234H
+         6406 7A         0020       LD   A,D
+         6407 CD1064     0025       CALL 6410H
+         640A 7B         0030       LD   A,E
+         640B CD1064     0035       CALL 6410H
+         640E 00         0040       NOP
+         640F 00         0045       NOP
+         6410 4F         0050       LD   C,A
+         6411 E6F0       0055       AND  0F0H
+         6413 1F         0060       RRA
+         6414 1F         0065       RRA
+         6415 1F         0070       RRA
+         6416 1F         0075       RRA
+         6417 CD2164     0080       CALL 6421H
+         641A 79         0085       LD   A,C
+         641B E60F       0090       AND  0FH
+         641D CD2164     0095       CALL 6421H
+         6420 C9         0100       RET
+         6421 C630       0105       ADD  30H
+         6423 FE3A       0110       CP   3AH
+         6425 3802       0115       JR   C,+2
+         6427 C607       0120       ADD  7
+         6429 77         0125       LD   (HL),A
+         642A 23         0130       INC  HL
+         642B C9         0135       RET
+         642C 00         0140       DEFB 0
+         642D 00         0145       DEFB 0
+         642E 00         0150       DEFB 0
+         642F 00         0155       DEFB 0
+                           0160       END
+
+  6
+
+The code from 6400 to 640D converts the  value  held  in
+the DE register pair into  four  ASCII  character  codes
+representing that value, and  puts  the  four  character
+codes into memory at 642C (this location held in HL).
+The code starting at 6410 and at  6421  are  subroutines
+called during this process.
+
+Having entered the code, type  X  to  restore  the  main
+Monitor Prompt and then type  T  followed  by  6400.
+The trace display will be formed in a similar fashion to
+that  shown  above.  The  STEP  mode  is   automatically
+selected, and is shown at the top of the  screen.  Below
+that is a disassembly of  the  next  instruction  to  be
+executed.  The  Register  display  shows  the    current
+register  contents  (which  could  be  anything  as   no
+instructions have been executed yet). The Stack  display
+shows the last five pairs of bytes on  the  Stack,  with
+the last value placed on the Stack indicated by the  *.
+
+The M display line at the bottom of the screen  gives  a
+window onto memory locations, and the  starting  address
+can be changed at any time by typing  M  followed  by  a
+four digit Hex address. In the example above,  it  would
+be useful to see a  display  of  the  memory  that  will
+eventually contain the four ASCII  characters,  so  type
+M642C. The  M  display is updated as soon as the  fourth
+digit is entered and you do not need to press ENTER.
+
+While in the Trace command,  the  address  of  the  next
+instruction can be changed at any  time  by  typing  S
+followed by the new Hex address followed by ENTER.  This
+restores STEP mode and updates  the  display  ready  for
+execution of the next instruction at the new address.
+
+To execute the first instruction  (LD  HL,642CH)  simply
+press ENTER. The display will now update and  show  642C
+in HL. Alongside that value are shown  the  contents  of
+the bytes at and immediately following that address. You
+will see that the disassembly of the  first  instruction
+has scrolled up one line, and that the next  instruction
+(LD DE,1234H) is displayed  on  the  second  disassembly
+line. The upper of the two Disassembly lines  is  always
+the instruction just executed, and the lower  is  always
+the instruction about to be executed.
+Continue pressing  ENTER  and  STEP  through  the  whole
+routine, stopping when the NOP  instruction  at  address
+640E is displayed on the second  disassembly  line,  and
+observe the effect on the display of  each  instruction.
+The register display of the PC value  will  ALWAYS  show
+the address of the NEXT instruction to be executed,  and
+the Stack display will only change  when  the  Stack  is
+used (in this case the CALL and RET instructions).
+
+                                                  7
+
+At any time you can exit from the Trace command back  to
+the main Monitor by typing  X. The screen will clear and
+the normal Monitor  Prompt  will  be  displayed  at  the
+bottom of the screen. You may  find  that  you  have  to
+press X more than once to do this. For example,  if  you
+are in the process of typing in  a  command  within  the
+Trace facility, the first  X  will  clear  that  command
+and the second  X  will access the main Monitor.
+
+You may have found that single stepping through the  two
+subroutines became tedious after you had stepped through
+them once, and proved that they did work.  To  speed  up
+this process the Trace command  contains  two  functions
+that can be used to automatically step through  sections
+of your program that have already been proved. They are:
+
+(i) BREAKPOINT
+Do  not  confuse  this  Breakpoint  function  with   the
+BREAKPOINT  command  in  the  main  Monitor.  Setting  a
+Breakpoint while in the Trace  command  does  not  alter
+your program. The  Breakpoint  address  is  stored,  and
+after each instruction is executed by the Trace command,
+the address of the next instruction in your  program  is
+compared with the Breakpoint address. If that address is
+not equal to the  Breakpoint, the  next  instruction  is
+decoded and automatically executed,  until  the  program
+address is equal to the  Breakpoint  address,  whereupon
+the whole display  is  updated  and  the  STEP  mode  is
+accessed.
+
+To use the above example to demonstrate the use  of  the
+Breakpoint, type  X to access the main Monitor and use
+the M  command  to  write  00  into  the  four  memory
+locations from 642C Hex. (You do not need to do this  to
+clarify what is happening by clearing  the  ASCII  codes
+already written there). Re-enter the  Trace  command  by
+typing T6400  and then type B640E, followed by ENTER.
+This has put the Trace command into BREAKPOINT mode  and
+this is displayed at the top of the screen.
+
+Pressing ENTER  again  will  cause  the  program  to  be
+executed under the control of the  Trace  command  until
+the Breakpoint is reached. The  display  is  then  fully
+updated and STEP mode accessed.
+
+While the program was being executed, the only  part  of
+the display to be updated was the value  of  PC  in  the
+Register display. Should you have set a Breakpoint at an
+address that for some reason is never reached (perhaps a
+conditional instruction that has jumped  elsewhere)  the
+constantly changing PC  value  will  indicate  that  the
+command is still running. In this case you can escape by
+pressing CAPS  shift  and  BREAK  together,  which  will
+access the  STEP  mode  again  and  update  the  display
+
+
+ 8
+
+showing the address at which the Break occurred.
+
+(ii)SKIP to RET
+This function can be accessed at any time while  in  the
+STEP mode. Type  R  and press ENTER. The top line of the
+display will now show  STEP      STEP to  RET.  Pressing
+ENTER again will cause the Trace  command  to    execute
+your program automatically , and stop (in the STEP mode)
+when it has executed the RET instruction associated with
+the next CALL instruction. While the subroutine is being
+executed, the display of the PC register  value  is  the
+only part of the display to be updated. On completion of
+the subroutine the whole display is  updated    and  the
+normal STEP mode is accessed.
+
+To demonstrate, type S6400 (assuming you  are  still  in
+the TRACE command) followed by ENTER. The  display  will
+update and you will be ready to single step from address
+6400. Press ENTER three times to execute the first three
+instructions  of  the  example   program.    The    next
+instruction will now be CALL 6410. Press R  followed  by
+ENTER, to access the SKIP to RET mode.
+Press ENTER again, and the subroutine at  6410  will  be
+executed  in  its  entirety,  including  the  two   CALL
+instructions within it,  and  the  display  will  update
+showing the  LD  A,E  instruction at 640A  as  the  next
+instruction on the  second  disassembly  line,  and  the
+original CALL on the line above. The  normal  STEP  mode
+will also be indicated at the top of the screen.
+
+You can now continue stepping through the program  using
+the ENTER key. So press ENTER to execute the  LD  A,E  ,
+and then press ENTER again to execute  the   CALL  6410.
+The  next  instruction  will  be  shown  as  LD  C,A  at
+address  6410  and  is  the  first  instruction  in  the
+subroutine. If you now press  R and ENTER to access  the
+SKIP to RET mode, a second press on ENTER  will  execute
+the program up to the RET associated with the next CALL.
+The next CALL  is  at  address  6417  (CALL  6421),  and
+execution will stop showing LD A,C at  address  641A  as
+the next instruction. Follow this through  by  referring
+to the program listing to clarify what has happened.
+
+If  you  use  the  SKIP  to  RET  function,  and  a  RET
+instruction is found before a CALL instruction, that RET
+instruction will cause automatic execution to  stop  and
+the STEP mode to be accessed. This can  be  demonstrated
+by single stepping through the example program using the
+ENTER key in normal STEP mode, until an  instruction  in
+the subroutine at 6421 is shown as the next instruction.
+Using  the  SKIP  to  RET  mode  at  this  point    will
+automatically execute the program until the RET at 642B.
+The routine will stop in the STEP mode, showing the next
+instruction as being the one  following  the  CALL  that
+called the subroutine.
+
+
+                                               9
+
+To summarise SKIP to RET, automatic execution  continues
+up to and including the RET instruction associated  with
+the next CALL, Or to the next  RET  if  a  CALL  is  not
+encountered in the meantime.
+
+In the same way as the Z  (Disassemble) command  in  the
+main Monitor gives an 'INVALID ADDRESS' error if you try
+to disassemble  the  Monitor,  you  cannot  single  step
+through the Monitor  program,  the  same  error  message
+being displayed. If this error  condition  occurs  while
+you are in the Trace command, an automatic exit  to  the
+main Monitor is made, and the main Monitor's  Prompt  is
+shown at the bottom of the screen.
+
+REGISTER POINTER
+You will notice that an inverse video '>'  is  displayed
+immediately to the left of the register contents column.
+This is the Register Pointer and is used to  enable  the
+contents of a register pair to be  easily  changed  from
+the TRACE command. The pointer can be moved up  or  down
+by using the cursor control keys (6 for down and  7  for
+up). To alter the  contents  of  a  register,  move  the
+Pointer until it indicates the required  register  pair,
+and then press the 1 key. The current value is shown  on
+the bottom line of the Trace display.
+
+You can now either press ENTER to restore the same value
+or type in a 4 digit Hex number to change  the  register
+value.
+
+This facility only operates in  the  STEP  mode  of  the
+Trace command and can easily  be  used  while  debugging
+software  using  the  main  Monitor.  Access  the  Trace
+command by typing T  followed  by  ENTER.  All  register
+values are passed to the Trace command, and after making
+your register alterations, exit to the main  Monitor  by
+typing X. Again, all register values are passed back  to
+the main Monitor.
+
+If your program used routines that must be run  at  full
+Machine Code speed to operate (e.g. cassette or  Printer
+routines) you will need to escape from the Trace command
+by typing  X  and use the main Monitor commands  to  run
+those routines properly. All  the  register  values  are
+passed back to the main Monitor, and you can then set  a
+normal Breakpoint (using the main Monitor B command) and
+use the C (Continue) command to continue executing  your
+program in real time  from  the  point  at  which  Trace
+stopped.
+
+Having encountered the Breakpoint, use  K  to clear  the
+Breakpoint, and access the Trace  command  by  typing  T
+followed by ENTER.  All  the  Register  values  and  the
+address of the next instruction are passed back  to  the
+Trace command ready for you to continue Single Stepping.
+
+
+ 10
+
+ MEMORY MAPS
+
+                         16K
+    ____________________________________________
+   |       |                        |        |  |
+   |Screen |                        | Monitor|U |
+   |Basic  |    Spare Memory        |   16   |D |
+   |Etc    |                        |        |G |
+   |_______|________________________|________|__|
+4000H                             26860        7FFFH
+                                  68ECH
+                                    |
+                                 Ramtop
+
+
+
+                         48K
+    ____________________________________________
+   |       |                        |        |  |
+   |Screen |                        | Monitor|U |
+   |Basic  |    Spare Memory        |   48   |D |
+   |Etc    |                        |        |G |
+   |_______|________________________|________|__|
+4000H                             59628        FFFFH
+                                  E8ECH
+                                    |
+                                 Ramtop
